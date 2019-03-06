@@ -1,0 +1,72 @@
+$p-size: 25px;
+$h-size: 50px;
+$button-font-size: 15px;
+$button-margin: 20px;
+$button-padding: 10px 20px 10px 20px;
+$button-radius: 5px;
+$animation-duration: 0.4s;
+
+.Home {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../Assets/background.jpg);
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0px 0px 1000px 100px rgb(0,0,0);
+
+    &Contents {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 999;
+        color: white;
+    }
+    
+    &Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(189, 33, 33);
+        color: white;
+        font-size: $button-font-size;
+        margin: $button-margin;
+        padding: $button-padding;
+        transition: $animation-duration;
+        border-radius: $button-radius;
+
+        &:hover {
+            background-color: rgb(148, 28, 28);
+        }
+
+        &:active {
+            background-color: rgb(114, 22, 22);
+        }
+    }
+
+    &Gradient {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    &Header {
+        text-align: center;
+        
+        p {
+            font-size: $p-size;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: $h-size;
+            margin: 0;
+        }
+    }
+  }
+  
