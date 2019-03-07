@@ -1,0 +1,48 @@
+$bg-color: rgb(38, 38, 38);
+$input-color: #888888;
+$input-focus-color: rgb(148, 28, 28);
+$input-padding: 15px;
+$ani-dur: 0.4s;
+$font-size: 30px;
+
+.Search {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $bg-color;
+    color: white;
+
+
+    &Input {
+        width: 70%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid $input-color;
+        outline: none;
+        color: $input-color;
+        transition: border $ani-dur ease-out;
+        text-align: center;
+        font-size: $font-size;
+        padding: $input-padding;
+
+        &:focus {
+            border-bottom: 4px solid $input-focus-color;
+            color: $input-focus-color;
+
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                visibility: hidden;
+                color: $input-focus-color;
+                opacity: 1; /* Firefox */
+            }
+
+            &::selection {
+                background: $input-focus-color;
+                color: $bg-color; /* WebKit/Blink Browsers */
+            }
+        }
+    }
+}
+

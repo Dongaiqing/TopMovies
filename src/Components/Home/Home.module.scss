@@ -1,10 +1,10 @@
 $p-size: 30px;
 $h-size: 60px;
 $button-font-size: 20px;
-$button-margin: 30px;
-$button-padding: 15px 25px 15px 25px;
+$button-margin: 20px;
+$button-padding: 15px 45px 15px 45px;
 $button-radius: 5px;
-$animation-duration: 0.4s;
+$animation-duration: 0.2s;
 
 .Home {
     display: flex;
@@ -24,28 +24,8 @@ $animation-duration: 0.4s;
         align-items: center;
         flex-direction: column;
         z-index: 999;
+        width: 100%;
         color: white;
-    }
-    
-    &Button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(189, 33, 33);
-        color: white;
-        font-size: $button-font-size;
-        margin: $button-margin;
-        padding: $button-padding;
-        transition: $animation-duration;
-        border-radius: $button-radius;
-
-        &:hover {
-            background-color: rgb(148, 28, 28);
-        }
-
-        &:active {
-            background-color: rgb(114, 22, 22);
-        }
     }
 
     &Gradient {
@@ -66,6 +46,36 @@ $animation-duration: 0.4s;
         h1 {
             font-size: $h-size;
             margin: 0;
+        }
+    }
+
+    .ButtonWrapper {
+        display: flex;
+        width: 80%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(189, 33, 33);
+        color: white;
+        font-size: $button-font-size;
+        margin: $button-margin;
+        padding: $button-padding;
+        transition: $animation-duration;
+        border-radius: $button-radius;
+
+        &:hover {
+            background-color: rgb(148, 28, 28);
+        }
+
+        &:active {
+            background-color: rgb(114, 22, 22);
         }
     }
   }
