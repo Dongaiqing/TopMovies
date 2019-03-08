@@ -103,7 +103,9 @@ $height: 250px;
 
         &Content {
             height: 50%;
-            overflow: scroll;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: $tag-padding;
 
             p {
                 margin: 0;
@@ -111,7 +113,5 @@ $height: 250px;
                 font-size: $font-size;
             }
         }
-
-        
     }
 }

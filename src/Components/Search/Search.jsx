@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Input } from 'semantic-ui-react'
 import axios from "axios";
-import { Search as SearchCss, SearchInput, SearchResult } from "./Search.module.scss";
+import { Search as SearchCss, SearchInput, SearchResult, 
+		SearchNoResult as NoResult } from "./Search.module.scss";
 import DropDownMovieView from "./DropDownMovieView/DropDownMovieView";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const WAIT_INTERVAL = 500;
 const ENTER_KEY = 13;
@@ -113,7 +115,7 @@ class Search extends Component {
 					value={this.state.value}
 				/>
 				<div className={SearchResult}>
-					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : []}
+					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : <div className={NoResult}><FontAwesomeIcon icon="sad-tear" /><p>No results</p></div>}
 				</div>
 			</div>
 		);

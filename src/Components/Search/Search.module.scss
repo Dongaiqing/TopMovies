@@ -4,6 +4,9 @@ $input-focus-color: rgb(167, 71, 71);
 $input-padding: 15px;
 $ani-dur: 0.4s;
 $font-size: 30px;
+$no-result-size-icon: 50px;
+$no-result-size-p: 20px;
+$no-result-margin-p: 20px;
 
 .Search {
     width: 100%;
@@ -11,14 +14,14 @@ $font-size: 30px;
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     background-color: $bg-color;
     color: white;
 
-
     &Input {
         width: 70%;
+        height: 10%;
         background: transparent;
         border: none;
         border-bottom: 2px solid $input-color;
@@ -48,12 +51,43 @@ $font-size: 30px;
 
     &Result {
         width: 70%;
-        max-height: 80%;
+        height: 70%;
         display: flex;
         flex-direction: column;
         align-content: space-between;
-        overflow: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
         margin: $input-padding;
+        transition: max-height 0.15s ease-out;
+    }
+
+    &NoResult {
+        font-size: $no-result-size-icon;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: $input-color;
+
+        p {
+            margin: $no-result-margin-p;
+            font-size: $no-result-size-p;
+        }
+    }
+
+        /* width */
+    ::-webkit-scrollbar {
+        transition: 0.4s;
+        width: 2px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: none; 
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $input-focus-color; 
     }
 }
 
