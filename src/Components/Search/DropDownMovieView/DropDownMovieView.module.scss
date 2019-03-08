@@ -1,16 +1,22 @@
 $title-size: 30px;
 $font-size: 17px;
 $tag-size: 15px;
-
-$tag-padding: 3px 8px 3px 8px; 
+$star-size: 10px;
+$tag-padding: 3px 10px 3px 10px; 
 $tag-margin: 5px;
 $desc-margin: 10px;
 
 $padding: 15px 20px 15px 20px;
 $margin: 25px 20px 25px 20px;
+$height: 250px;
+
 $font-color: #c6c6c6;
 $main-red: rgb(167, 71, 71);
-$height: 250px;
+$bad-color: rgb(167, 71, 71);
+$med-color: rgb(176, 158, 87);
+$good-color: rgb(88, 140, 83);
+$no-color: rgb(92, 92, 92);
+$tag-color: rgb(65, 102, 165);
 
 .DropDownMovieView {
     display: flex;
@@ -19,10 +25,11 @@ $height: 250px;
     justify-content: center;
     margin: $margin;
     height: $height;
+    border-radius: 10px;
     transition: 0.4s;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.14);
     }
 
     &Image {
@@ -49,10 +56,11 @@ $height: 250px;
         
         &Title {
             display: flex;
-            height: 20%;
+            height: 10%;
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            transition: 0.4s;
 
             h1 {
                 // height: 100%;
@@ -62,6 +70,12 @@ $height: 250px;
                 text-align: center;
                 font-size: $title-size;
                 margin: 0px;
+            }
+
+            &:hover {
+                color: $main-red;
+                cursor: pointer;
+                transition: 0.4s;
             }
         }
 
@@ -76,7 +90,6 @@ $height: 250px;
             p {
                 font-size: $font-size;
                 margin: 0px 10px 0px 10px;
-                font-style: italic;
             }
 
             &TagContainer {
@@ -87,7 +100,7 @@ $height: 250px;
                 justify-content: center;
                 
                 .Tag {
-                    background-color: $main-red;
+                    background-color: $tag-color;
                     border-radius: 3px;
                     padding: $tag-padding;
                     margin: $tag-margin;
@@ -99,11 +112,38 @@ $height: 250px;
                     }
                 }
             }
+
+            &Rate {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $no-color;
+                color: white;
+                border-radius: 3px;
+                padding: $tag-padding;
+                margin: $tag-margin;
+                
+                p {
+                    margin: 0px 0px 0px 10px;
+                }
+                
+                &Bad {
+                    background-color: $bad-color;
+                }
+    
+                &Mediocre {
+                    background-color: $med-color;
+                }
+    
+                &Good {
+                    background-color: $good-color;
+                }
+            }
         }
 
         &Content {
             height: 50%;
-            overflow-y: auto;
+            overflow-y: hidden;
             overflow-x: hidden;
             padding: $tag-padding;
 

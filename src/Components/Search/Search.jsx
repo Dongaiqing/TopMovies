@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Input } from 'semantic-ui-react'
 import axios from "axios";
 import { Search as SearchCss, SearchInput, SearchResult, 
 		SearchNoResult as NoResult } from "./Search.module.scss";
@@ -8,7 +7,6 @@ import DropDownMovieView from "./DropDownMovieView/DropDownMovieView";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const WAIT_INTERVAL = 500;
-const ENTER_KEY = 13;
 
 class Search extends Component {
 	constructor() {

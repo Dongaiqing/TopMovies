@@ -11,16 +11,35 @@ import {
 	DropDownMovieViewDesc as ViewDesc,
 	DropDownMovieViewDescTitle as DescTitle,
     DropDownMovieViewDescContent as DescContent,
-    DropDownMovieViewDescMisc as DescMisc,
+	DropDownMovieViewDescMisc as DescMisc,
+	DropDownMovieViewDescMiscRate as Rate,
+	DropDownMovieViewDescMiscRateGood as RateGood,
+	DropDownMovieViewDescMiscRateMediocre as RateMediocre,
+	DropDownMovieViewDescMiscRateBad as RateBad,
 	DropDownMovieViewDescMiscTagContainer as TagContainer,
 	Tag
 } from "./DropDownMovieView.module.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 class DropDownMovieView extends Component {
 	constructor() {
 		super();
         this.poster_base = "https://image.tmdb.org/t/p/w500/";
 
+	}
+
+	getRatingClass() {
+		if (!this.props.movie.rate)
+			return `${Rate}`;
+
+		let rate = parseFloat(this.props.movie.rate) * 10;
+		if (rate >= 75)
+			return `${Rate} ${RateGood}`
+		else if (rate >= 45)
+			return `${Rate} ${RateMediocre}`
+		else
+			return `${Rate} ${RateBad}`
 	}
 
 	render() {
@@ -40,7 +59,12 @@ class DropDownMovieView extends Component {
 							<div className={DescTitle}>
 								<h1>{this.props.movie.title}</h1>
 							</div>
+							
 							<div className={DescMisc}>
+								<div className={this.getRatingClass()}>
+									<FontAwesomeIcon size={5} icon="star" />
+									<p>{this.props.movie.rate ? this.props.movie.rate : "No Ratings"}</p>
+								</div>
                                 <div className={TagContainer}>
                                         {this.props.movie.genres.map((obj, idx) => (
                                             <div className={Tag} key={idx}>

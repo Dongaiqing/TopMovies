@@ -6,6 +6,8 @@ import Home from '../Home/Home.jsx';
 import Search from '../Search/Search.jsx'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSadTear } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+
 
 class App extends Component {
   render() {
@@ -26,5 +28,8 @@ class App extends Component {
     );
   }
 }
+
 library.add(faSadTear);
+library.add(faStar);
+
 export default App;
