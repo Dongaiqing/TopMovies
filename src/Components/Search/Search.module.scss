@@ -1,6 +1,6 @@
 $bg-color: rgb(38, 38, 38);
 $input-color: #888888;
-$input-focus-color: rgb(148, 28, 28);
+$input-focus-color: rgb(167, 71, 71);
 $input-padding: 15px;
 $ani-dur: 0.4s;
 $font-size: 30px;
@@ -12,6 +12,7 @@ $font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: $bg-color;
     color: white;
 
@@ -43,6 +44,16 @@ $font-size: 30px;
                 color: $bg-color; /* WebKit/Blink Browsers */
             }
         }
+    }
+
+    &Result {
+        width: 70%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        overflow: scroll;
+        margin: $input-padding;
     }
 }
 

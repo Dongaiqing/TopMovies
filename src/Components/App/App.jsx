@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css';
 
-// Include your new Components here
 import Home from '../Home/Home.jsx';
 import Search from '../Search/Search.jsx'
-// import Gallery from '../Gallery/Gallery.jsx';
-// import Pokemon from '../Pokemon/Pokemon.jsx';
 
 class App extends Component {
   render() {
