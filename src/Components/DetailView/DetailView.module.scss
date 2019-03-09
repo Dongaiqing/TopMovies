@@ -1,9 +1,10 @@
 $header-height: 400px;
 $bg-color: rgb(38, 38, 38);
-$font-color: #888888;
+$font-color: #c6c6c6;
 $title-size: 60px;
 $button-size: 15px;
-$overview-size: 20px;
+$overview-size: 25px;
+$misc-size: 17px;
 $button-padding: 7px 15px 7px 15px;
 $header-padding: 60px 60px 20px 60px;
 $main-red: rgb(167, 71, 71);
@@ -19,11 +20,12 @@ body {
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
+    overflow: auto;
 
     &Header {
         display: flex;
         color: white;
-        box-shadow: inset 0px -80px 100px 10px $bg-color;
+        box-shadow: inset 0px -100px 170px 30px $bg-color;
         width: 100%;
         height: $header-height;
         background-size: cover;
@@ -31,15 +33,32 @@ body {
         flex-direction: column;
         padding: $header-padding;
 
-        h1 {
-            margin: 0;
-            font-size: $title-size;
+        &TitleWrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            height: 80%;
+            overflow: auto;
+            
+            h1 {
+                max-width: 60%;
+                margin: 0;
+                align-self: flex-end;
+                font-size: $title-size;
+            }
+
+            p {
+                margin-left: 40px;
+                font-style: italic;
+                align-self: flex-end;
+                font-size: $overview-size;
+            }
         }
 
         &ButtonWrapper {
             display: flex;
             flex-direction: row;
-            margin-top: 10px;
+            margin-top: 20px;
 
             a {
                 font-size: $button-size;
@@ -56,18 +75,48 @@ body {
     &ContentWrapper {
         display: flex;
         flex-direction: row;
+        width: 80%;
+        margin-bottom: 100px;
 
         &MiscWrapper {
-            width: 35%;
+            width: 25%;
             display: flex;
-            flex-direction: column
+            flex-direction: column;
+            color: $font-color;
+
+            &Component {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 3px;
+
+                &FontAwesome {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    width: 20%;
+                    height: 40px;
+                    color: $font-color;
+				    margin: 10px;
+                } 
+
+                p {
+                    width: 80%;
+                    font-size: $misc-size;
+                    vertical-align: inherit;
+                }
+            }
+
+
         }
 
         &Overview {
-            width: 65%;
+            width: 75%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: baseline;
             color: $font-color;
             font-size: $overview-size;
 

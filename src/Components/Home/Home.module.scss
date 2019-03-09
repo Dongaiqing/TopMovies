@@ -5,6 +5,7 @@ $button-margin: 20px;
 $button-padding: 15px 45px 15px 45px;
 $button-radius: 5px;
 $animation-duration: 0.2s;
+$main-red: rgb(191, 58, 58);
 
 .Home {
     display: flex;
@@ -62,7 +63,7 @@ $animation-duration: 0.2s;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgb(189, 33, 33);
+        background-color: $main-red;
         color: white;
         font-size: $button-font-size;
         margin: $button-margin;

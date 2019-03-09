@@ -8,8 +8,11 @@ import {
 	DetailView as DetailCss,
 	DetailViewHeader as Header,
 	DetailViewHeaderButtonWrapper as ButtonWrapper,
+	DetailViewHeaderTitleWrapper as TitleWrapper,
 	DetailViewContentWrapper as ContentWrapper,
 	DetailViewContentWrapperMiscWrapper as MiscWrapper,
+	DetailViewContentWrapperMiscWrapperComponent as ComponentWrapper,
+	DetailViewContentWrapperMiscWrapperComponentFontAwesome as fontAwesomeWrapper,
 	DetailViewContentWrapperOverview as Overview
 } from "./DetailView.module.scss";
 
@@ -42,8 +45,9 @@ class DetailView extends Component {
 					const data = response.data;
 					let modi = {
 						title: data.title,
+						orig_title: data.original_title,
 						imdb: `https://www.imdb.com/title/${data.imdb_id}`,
-						lang: data.original_language,
+						lang: data.original_language.toUpperCase(),
 						img_path: data.backdrop_path,
 						rate: data.vote_average,
 						votes: data.vote_count,
@@ -54,7 +58,8 @@ class DetailView extends Component {
 						runtime: this.getRunTimeString(data.runtime),
 						budget: this.getRevenueString(data.budget), 
 						revenue: this.getRevenueString(data.revenue),
-						website: data.homepage
+						website: data.homepage,
+						tagline: data.tagline
 					};
 					this.setState({
 						movie: modi, 
@@ -74,27 +79,35 @@ class DetailView extends Component {
 		}
 	}
 
-	// getRatingClass() {
-	// 	if (!this.props.movie.rate)
-	// 		return `${Rate}`;
+	getRatingColor() {
+		const badColor = "rgb(167, 71, 71)";
+		const medColor = "rgb(176, 158, 87)";
+		const goodColor = "rgb(88, 140, 83)";
+		const noColor = "rgb(92, 92, 92)";
 
-	// 	let rate = parseFloat(this.props.movie.rate) * 10;
-	// 	if (rate >= 70)
-	// 		return `${Rate} ${RateGood}`
-	// 	else if (rate >= 45)
-	// 		return `${Rate} ${RateMediocre}`
-	// 	else
-	// 		return `${Rate} ${RateBad}`
-	// }
+		if (!this.state.movie.rate)
+			return noColor;
+
+		let rate = parseFloat(this.state.movie.rate) * 10;
+		if (rate >= 70)
+			return goodColor;
+		else if (rate >= 45)
+			return medColor;
+		else
+			return badColor;
+	}
 
 	getRunTimeString(minute) {
 		const h = Math.floor(minute / 60);
 		const m = minute % 60;
-		return `${h} HR ${m} MIN`
+		return h === 0 ? `${m} MIN` : `${h} HR ${m} MIN`;
 	}
 
 	getRevenueString(revenue) {
-		return `$${Math.floor(revenue / 1000000)}M`
+		if (revenue === 0)
+			return 0;
+		const intVal = Math.floor(revenue / 1000000);
+		return intVal === 0 ? `$${(revenue / 1000000).toFixed(2)}M` : `$${intVal}M`
 	}
 
 	render() {
@@ -103,26 +116,111 @@ class DetailView extends Component {
 				<div>invalid parameter</div>
 			);
 		} else {
-			const imgPath = this.state.movie.img_path ? `${this.imgBase}${this.state.movie.img_path}` : placeHolderImage;
-			
+			const movie = this.state.movie;
+
+			const imgPath = movie.img_path ? `${this.imgBase}${movie.img_path}` : placeHolderImage;
+
 			const headerStyle = {
 				backgroundImage: `url(${imgPath})`
 			};
 			const imdbStyle = {backgroundColor: '#f3ce13', color: 'black'};
 			const websiteStyle = {backgroundColor: '$main-red'};
+			const rateWrapper = {
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center"
+			}
+			const rateStyle = {
+				color: "white",
+				width: "100%",
+				margin: 0
+			}
+			const voteStyle = {
+				margin: 0,
+				color: "#c6c6c6",
+				width: "100%",
+				fontStyle: "italic"
+			}
+			const taglineStyle = {
+				padding: "60px", 
+				width: "100%", 
+				margin: 0, 
+				color: "white", 
+				fontSize: "40px", 
+				textAlign: "left"
+			}
+
 			return (
 				<div className={DetailCss}>
 					<div className={Header} style={headerStyle}>
-						<h1>{this.state.movie.title}</h1>
+						<div className={TitleWrapper}>
+							<h1>{movie.title === movie.orig_title ? movie.title : `${movie.title} (${movie.orig_title})`}</h1>
+							<p>{movie.date}</p>
+						</div>
 						<div className={ButtonWrapper}>
-							{this.state.movie.website ? <a href={this.state.movie.website} target="_blank" style={websiteStyle}>Website</a> : []}
-							{this.state.movie.imdb ? <a href={this.state.movie.imdb} target="_blank" style={imdbStyle}>IMDB</a> : []}
+							{movie.website ? <a href={movie.website} target="_blank" rel="noopener noreferrer" style={websiteStyle}>Website</a> : []}
+							{movie.imdb ? <a href={movie.imdb} target="_blank" rel="noopener noreferrer" style={imdbStyle}>IMDB</a> : []}
 						</div>
 					</div>
+					<h1 style={taglineStyle}>{movie.tagline}</h1>
 					<div className={ContentWrapper}>
-						<div className={MiscWrapper}></div>
+						<div className={MiscWrapper}>
+							{/* Rating */}
+							{movie.rate ? 
+							<div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="star" style={{color: this.getRatingColor()}} size="2x"/>
+								</div>
+								<div style={rateWrapper}>
+									<p style={rateStyle}>{movie.rate} / 10</p>
+									<p style={voteStyle}>{movie.votes} votes</p>
+								</div>
+							</div> : []}
+							
+							{/* Runtime */}
+							<div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="clock" size="2x" />
+								</div>
+								<p>{movie.runtime}</p>
+							</div>
+
+							{/* Budget */}
+							{movie.budget !== 0 ?
+							<div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="dollar-sign" size="2x"/>	
+								</div>
+								<p>{movie.budget} / {movie.revenue}</p>
+							</div> : []}
+
+							{/* Language */}
+							{movie.lang ? 
+							<div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="globe" size="2x"/>	
+								</div>
+								<p>{movie.lang}</p>
+							</div> : []}
+
+							{/* Tags */}
+							{movie.genres && movie.genres.length ? <div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="tag" size="2x"/>	
+								</div>
+								<p>{movie.genres.join(" | ")}</p>
+							</div> : []}
+
+							{/* Productions */}
+							{movie.production && movie.production.length ? <div className={ComponentWrapper}>
+								<div className={fontAwesomeWrapper}>
+									<FontAwesomeIcon icon="film" size="2x"/>	
+								</div>
+								<p>{movie.production.join(" | ")}</p>
+							</div> : []}
+						</div>
 						<div className={Overview}>
-							<p>{this.state.movie.overview}</p>
+							<p>{movie.overview}</p>
 						</div>
 					</div>
 				</div>
