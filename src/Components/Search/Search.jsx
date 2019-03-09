@@ -20,7 +20,6 @@ class Search extends Component {
 
 		this.timeout = 0;
 		this.baseUrl = "https://api.themoviedb.org/3/search/movie?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US&page=1&include_adult=false&query=";
-		this.genresUrl = "https://api.themoviedb.org/3/genre/movie/list?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US";
 		
 		this.genreMap =  {
 			28: "Action",

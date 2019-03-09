@@ -44,7 +44,7 @@ $no-result-margin-p: 20px;
 
             &::selection {
                 background: $input-focus-color;
-                color: $bg-color; /* WebKit/Blink Browsers */
+                color: white; /* WebKit/Blink Browsers */
             }
         }
     }

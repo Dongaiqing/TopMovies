@@ -1,0 +1,79 @@
+$header-height: 400px;
+$bg-color: rgb(38, 38, 38);
+$font-color: #888888;
+$title-size: 60px;
+$button-size: 15px;
+$overview-size: 20px;
+$button-padding: 7px 15px 7px 15px;
+$header-padding: 60px 60px 20px 60px;
+$main-red: rgb(167, 71, 71);
+
+body {
+    background-color: $bg-color;
+}
+
+.DetailView {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $bg-color;
+
+    &Header {
+        display: flex;
+        color: white;
+        box-shadow: inset 0px -80px 100px 10px $bg-color;
+        width: 100%;
+        height: $header-height;
+        background-size: cover;
+        justify-content: flex-end;
+        flex-direction: column;
+        padding: $header-padding;
+
+        h1 {
+            margin: 0;
+            font-size: $title-size;
+        }
+
+        &ButtonWrapper {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+
+            a {
+                font-size: $button-size;
+                color: white;
+                border-radius: 100px;
+                padding: $button-padding;
+                background-color: $main-red;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &ContentWrapper {
+        display: flex;
+        flex-direction: row;
+
+        &MiscWrapper {
+            width: 35%;
+            display: flex;
+            flex-direction: column
+        }
+
+        &Overview {
+            width: 65%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $font-color;
+            font-size: $overview-size;
+
+            p {
+                margin: 0px;
+            }
+        }
+    }
+}

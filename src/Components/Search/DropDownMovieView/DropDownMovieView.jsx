@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import "semantic-ui-css/semantic.min.css";
 import PropTypes from "prop-types";
 import placeHolderImage from "../../../Assets/mv_ph.png";
+import { Link } from "react-router-dom";
 
 // Include your new Components here
-import Search from "../Search.jsx";
+
 import {
 	DropDownMovieView as ViewCss,
 	DropDownMovieViewImage as ViewImage,
 	DropDownMovieViewDesc as ViewDesc,
 	DropDownMovieViewDescTitle as DescTitle,
-    DropDownMovieViewDescContent as DescContent,
+	DropDownMovieViewDescContent as DescContent,
 	DropDownMovieViewDescMisc as DescMisc,
 	DropDownMovieViewDescMiscRate as Rate,
 	DropDownMovieViewDescMiscRateGood as RateGood,
@@ -19,71 +20,67 @@ import {
 	DropDownMovieViewDescMiscTagContainer as TagContainer,
 	Tag
 } from "./DropDownMovieView.module.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DropDownMovieView extends Component {
 	constructor() {
 		super();
-        this.poster_base = "https://image.tmdb.org/t/p/w500/";
-
+		this.poster_base = "https://image.tmdb.org/t/p/w500/";
 	}
 
 	getRatingClass() {
-		if (!this.props.movie.rate)
-			return `${Rate}`;
+		if (!this.props.movie.rate) return `${Rate}`;
 
 		let rate = parseFloat(this.props.movie.rate) * 10;
-		if (rate >= 75)
-			return `${Rate} ${RateGood}`
-		else if (rate >= 45)
-			return `${Rate} ${RateMediocre}`
-		else
-			return `${Rate} ${RateBad}`
+		if (rate >= 70) return `${Rate} ${RateGood}`;
+		else if (rate >= 45) return `${Rate} ${RateMediocre}`;
+		else return `${Rate} ${RateBad}`;
 	}
 
 	render() {
-		const noMovie =
-			Object.entries(this.props.movie).length === 0 &&
-			this.props.movie.constructor === Object;
-		if (!noMovie) {
-			return (
-				<div>
-					<div className={ViewCss}>
-						<div className={ViewImage}>
-							<img src={
-                                this.props.movie.poster_path !== null ? `${this.poster_base}${this.props.movie.poster_path}` : placeHolderImage
-                            } />
-						</div>
-						<div className={ViewDesc}>
+		return (
+			<div>
+				<div className={ViewCss}>
+					<div className={ViewImage}>
+						<img
+							src={
+								this.props.movie.poster_path !== null
+									? `${this.poster_base}${this.props.movie.poster_path}`
+									: placeHolderImage
+							}
+						/>
+					</div>
+					<div className={ViewDesc}>
+						<Link
+							to={{ pathname: "/detail", state: { id: this.props.movie.id } }}
+						>
 							<div className={DescTitle}>
 								<h1>{this.props.movie.title}</h1>
 							</div>
-							
-							<div className={DescMisc}>
-								<div className={this.getRatingClass()}>
-									<FontAwesomeIcon size={5} icon="star" />
-									<p>{this.props.movie.rate ? this.props.movie.rate : "No Ratings"}</p>
-								</div>
-                                <div className={TagContainer}>
-                                        {this.props.movie.genres.map((obj, idx) => (
-                                            <div className={Tag} key={idx}>
-                                                <p>{obj}</p>
-                                            </div>
-                                        ))}
-								</div>
-								<p>{this.props.movie.date}</p>
-                            </div>
-                            <div className={DescContent}>
-                                <p>{this.props.movie.overview}</p>
-                            </div>
+						</Link>
+						<div className={DescMisc}>
+							<div className={this.getRatingClass()}>
+								<FontAwesomeIcon icon="star" />
+								<p>
+									{this.props.movie.rate ? this.props.movie.rate : "No Ratings"}
+								</p>
+							</div>
+							<div className={TagContainer}>
+								{this.props.movie.genres.map((obj, idx) => (
+									<div className={Tag} key={idx}>
+										<p>{obj}</p>
+									</div>
+								))}
+							</div>
+							<p>{this.props.movie.date}</p>
+						</div>
+						<div className={DescContent}>
+							<p>{this.props.movie.overview}</p>
 						</div>
 					</div>
 				</div>
-			);
-		} else {
-			return <div>No Results</div>;
-		}
+			</div>
+		);
 	}
 }
 

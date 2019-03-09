@@ -4,6 +4,8 @@ import 'semantic-ui-css/semantic.min.css';
 
 import Home from '../Home/Home.jsx';
 import Search from '../Search/Search.jsx'
+import DetailView from '../DetailView/DetailView.jsx'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSadTear } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +18,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/search" component={Search}/>
+          <Route exact path="/detail" component={DetailView}/> 
           {/* <Route exact path="/gallery" component={Gallery}/> */}
           {/*
             Add routes for new pages here!
