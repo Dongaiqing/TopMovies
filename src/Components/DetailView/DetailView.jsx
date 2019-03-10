@@ -141,7 +141,7 @@ class DetailView extends Component {
 				fontStyle: "italic"
 			}
 			const taglineStyle = {
-				padding: "60px", 
+				padding: "30px 80px", 
 				width: "100%", 
 				margin: 0, 
 				color: "white", 

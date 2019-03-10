@@ -10,10 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     GalleryView as ViewCss,
     GalleryViewFilterControl as FilterControl,
-    GalleryViewFilterControlFilterButton as Button,
-    GalleryViewFilterControlSortButton as SortButton,
-    GalleryViewFilterControlSortContent as SortContent,
-    GalleryViewFilterControlGenreButton as GenreButton,
+    GalleryViewFilterControlDropDown as DropDownMenu,
+    GalleryViewFilterControlDropDownButton as Button,
+    GalleryViewFilterControlDropDownContent as DropDownContent,
     GalleryViewGridView as GridView
 } from "./GalleryView.module.scss";
 
@@ -70,9 +69,12 @@ class GalleryView extends Component {
         };
 
         this.filterMap = {
-            "Popularity": "popularity.desc",
-            "Release Date": "release_date.asc",
-            "Rating Average": "vote_average.desc"
+            "Popularity  ↑": "popularity.asc",
+            "Popularity  ↓": "popularity.desc",
+            "Release Date  ↑": "release_date.asc",
+            "Release Date  ↓": "release_date.desc",
+            "Rating Average  ↑": "vote_average.asc",
+            "Rating Average  ↓": "vote_average.desc"
         }
 
 		this.state = {
@@ -147,6 +149,23 @@ class GalleryView extends Component {
         }, () => this.getMovieList());
     }
 
+    onGenreSelected(idx, genre) {
+        const checkbox = this.refs[`genreCheck${idx}`];
+        let curSelection = this.state.genres;
+        const index = curSelection.indexOf(genre);
+        if (index === -1) {
+            curSelection.push(genre);
+            checkbox.checked = true;
+        } else {
+            curSelection.splice(index, 1);
+            checkbox.checked = false;
+        }
+
+        this.setState({
+            genres: curSelection,
+        }, () => this.getMovieList());
+    }
+
 	render() {
         return (
             <div className={ViewCss}>
@@ -154,18 +173,26 @@ class GalleryView extends Component {
                     Movie Gallery
                 </h1>
                 <div className={FilterControl}>
-                    <div className={`${Button} ${SortButton}`}>
-                        <FontAwesomeIcon icon="sort-amount-down"/>
-                        <p>Sort By</p>
+                    <div className={DropDownMenu}>
+                        <div className={Button}>
+                            <FontAwesomeIcon icon="sort-amount-down"/>
+                            <p>Sort By</p>
+                        </div>
+                        <div className={DropDownContent}>
+                            {Object.keys(this.filterMap).map((x, idx) => <div key={idx} onClick={() => this.onSortSelected(x)}>{x}</div>)}
+                        </div>
                     </div>
-                    <div class={SortContent}>
-                        <p>Hello World!</p>
+
+                    <div className={DropDownMenu}>
+                        <div className={Button}>
+                            <FontAwesomeIcon icon="filter"/>
+                            <p>Genre Filter</p>
+                        </div>
+                        <div className={DropDownContent}>
+                            {Object.keys(this.genreToID).map((x, idx) => <div key={idx} onClick={() => this.onGenreSelected(idx, x)} ><input ref={`genreCheck${idx}`} type="checkbox" name={x} />{x}</div>)}
+                        </div>
                     </div>
-                    {/* <button onClick={() => this.onSortSelected("Release Date")} className={SortButton}>Button</button> */}
-                    <div className={`${Button} ${GenreButton}`}>
-                        <FontAwesomeIcon icon="filter"/>
-                        <p>Genre Filter</p>
-                    </div>
+                
                 </div>
                 <div className={GridView}>
                     {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => <SingleMovieView key={idx} movie={movie} />) : <NoResultView/>}

@@ -1,9 +1,12 @@
 $title-size: 60px;
 $font-size: 20px;
 $button-width: auto;
-$button-margin: 40px;
+$button-margin: 20px;
 $main-red: rgb(161, 71, 71);
 $font-color: #dcdcdc;
+$dropdown-color: #434343;
+$dropdown-shadow: #828282;
+
 
 .GalleryView {
     display: flex;
@@ -31,28 +34,66 @@ $font-color: #dcdcdc;
         font-size: 20px;
         flex-wrap: wrap;
 
-        &FilterButton {
-            display: flex;
-            flex-direction: row;
-            width: $button-width;
-            justify-content: center;
-            align-items: center;
-            margin: $button-margin;
-            transition: 0.4s;
+        &DropDown {
+            position: relative;
+            display: inline-block;
 
-            p {
-                margin-left: 15px;
-            }
-
-            &:hover {
+            &Button {
+                display: flex;
+                flex-direction: row;
+                width: $button-width;
+                justify-content: center;
+                align-items: center;
+                margin: $button-margin;
                 transition: 0.4s;
-                cursor: pointer;
-                color: $main-red;
+    
+                p {
+                    margin-left: 15px;
+                }
+    
+                &:hover {
+                    transition: 0.4s;
+                    cursor: pointer;
+                    color: $main-red;
+                }
             }
-        }
-        
-        &SortContent {
-            display: none;
+
+            &Content {
+                display: none;
+                position: absolute;
+                background-color: $dropdown-color;
+                z-index: 9990; 
+                transition: .4s;
+                width: 300px;
+                max-height: 500px;
+                overflow: auto;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0px 0px 60px $dropdown-shadow;
+
+                div {
+                    width: 100%;
+                    padding: 20px 30px 20px 30px;
+                    height: 50px;
+                    color: white;
+                    text-decoration: none;
+                    display: flex;
+                    transition: 0.4s;
+
+                    &:hover {
+                        background-color: $main-red;
+                        cursor: pointer;
+                        transition: 0.4s;
+                    }
+                }
+            }
+
+            &:hover &Content {
+                display: flex;
+                transition: .4s;
+            }
+              
         }
     }
 

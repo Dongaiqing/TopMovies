@@ -8,15 +8,8 @@ import DetailView from '../DetailView/DetailView.jsx';
 import GalleryView from '../GalleryView/GalleryView.jsx';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSadTear } from '@fortawesome/free-solid-svg-icons';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { faTag } from '@fortawesome/free-solid-svg-icons';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
-import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faSadTear, faStar, faClock, faDollarSign, faGlobe, faTag, faFilm, 
+          faSortAmountDown, faFilter, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 class App extends Component {
   render() {
@@ -34,7 +27,7 @@ class App extends Component {
 }
 
 const fonts = [faSadTear, faStar, faClock, faDollarSign, faGlobe, 
-                faTag, faFilm, faSortAmountDown, faFilter];
+                faTag, faFilm, faSortAmountDown, faFilter, faArrowUp, faArrowDown];
 library.add(fonts);
 
 export default App;
