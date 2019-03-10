@@ -1,4 +1,9 @@
-$title-size: 40px;
+$title-size: 60px;
+$font-size: 20px;
+$button-width: auto;
+$button-margin: 40px;
+$main-red: rgb(161, 71, 71);
+$font-color: #dcdcdc;
 
 .GalleryView {
     display: flex;
@@ -14,6 +19,41 @@ $title-size: 40px;
         margin: 0;
         color: white;
         font-size: $title-size;
+    }
+
+    &FilterControl {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        color: $font-color;
+        font-size: 20px;
+        flex-wrap: wrap;
+
+        &FilterButton {
+            display: flex;
+            flex-direction: row;
+            width: $button-width;
+            justify-content: center;
+            align-items: center;
+            margin: $button-margin;
+            transition: 0.4s;
+
+            p {
+                margin-left: 15px;
+            }
+
+            &:hover {
+                transition: 0.4s;
+                cursor: pointer;
+                color: $main-red;
+            }
+        }
+        
+        &SortContent {
+            display: none;
+        }
     }
 
     &GridView {

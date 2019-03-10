@@ -15,7 +15,8 @@ import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
-
+import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 class App extends Component {
   render() {
@@ -32,12 +33,8 @@ class App extends Component {
   }
 }
 
-library.add(faSadTear);
-library.add(faStar);
-library.add(faClock);
-library.add(faDollarSign);
-library.add(faGlobe);
-library.add(faTag);
-library.add(faFilm);
+const fonts = [faSadTear, faStar, faClock, faDollarSign, faGlobe, 
+                faTag, faFilm, faSortAmountDown, faFilter];
+library.add(fonts);
 
 export default App;

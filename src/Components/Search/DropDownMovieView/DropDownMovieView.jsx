@@ -51,7 +51,7 @@ class DropDownMovieView extends Component {
 							<div className={this.getRatingClass()}>
 								<FontAwesomeIcon icon="star" />
 								<p>
-									{this.props.movie.rate ? this.props.movie.rate : "No Ratings"}
+									{this.props.movie.rate ? this.props.movie.rate : "N/A"}
 								</p>
 							</div>
 							<div className={TagContainer}>

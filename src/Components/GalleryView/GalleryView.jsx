@@ -5,14 +5,17 @@ import { Link } from 'react-router-dom'
 import axios from "axios";
 import SingleMovieView from './SingleMovieView/SingleMovieView.jsx';
 import NoResultView from '../Utils/NoResultView.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
     GalleryView as ViewCss,
     GalleryViewFilterControl as FilterControl,
+    GalleryViewFilterControlFilterButton as Button,
+    GalleryViewFilterControlSortButton as SortButton,
+    GalleryViewFilterControlSortContent as SortContent,
+    GalleryViewFilterControlGenreButton as GenreButton,
     GalleryViewGridView as GridView
 } from "./GalleryView.module.scss";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 class GalleryView extends Component {
@@ -64,13 +67,17 @@ class GalleryView extends Component {
 			53: "Thriller",
 			10752: "War",
 			37: "Western"
-		}
+        };
+
+        this.filterMap = {
+            "Popularity": "popularity.desc",
+            "Release Date": "release_date.asc",
+            "Rating Average": "vote_average.desc"
+        }
 
 		this.state = {
-            filters: {
-                sortBy: null,
-                genres: []
-            },
+            sortBy: null,
+            genres: [],
 			movieList: {},
 			hasMovie: false
 		};
@@ -79,10 +86,10 @@ class GalleryView extends Component {
 	}
 
 	getMovieList() {
-        let sortUrl = this.state.filters.sortBy ? 
-                        `&sort_by=${this.state.filters.sortBy}` : '';
-        let genresUrl = this.state.filters.genres.length !== 0 ? 
-                        `&with_genres=${this.state.filters.genres.map(
+        let sortUrl = this.state.sortBy ? 
+                        `&sort_by=${this.state.sortBy}` : '';
+        let genresUrl = this.state.genres.length !== 0 ? 
+                        `&with_genres=${this.state.genres.map(
                             x => this.genreToID[x]
                         ).join(',')}` : '';
 
@@ -132,7 +139,13 @@ class GalleryView extends Component {
 			return medColor;
 		else
 			return badColor;
-	}
+    }
+    
+    onSortSelected(sort) {
+        this.setState({
+            sortBy: this.filterMap[sort],
+        }, () => this.getMovieList());
+    }
 
 	render() {
         return (
@@ -141,11 +154,18 @@ class GalleryView extends Component {
                     Movie Gallery
                 </h1>
                 <div className={FilterControl}>
-                    <select>
-                        <option value="popularity.desc">Popularity</option>
-                        <option value="release_date.desc">Release Date</option>
-                        <option value="vote_average.desc">Vote</option>
-                    </select>
+                    <div className={`${Button} ${SortButton}`}>
+                        <FontAwesomeIcon icon="sort-amount-down"/>
+                        <p>Sort By</p>
+                    </div>
+                    <div class={SortContent}>
+                        <p>Hello World!</p>
+                    </div>
+                    {/* <button onClick={() => this.onSortSelected("Release Date")} className={SortButton}>Button</button> */}
+                    <div className={`${Button} ${GenreButton}`}>
+                        <FontAwesomeIcon icon="filter"/>
+                        <p>Genre Filter</p>
+                    </div>
                 </div>
                 <div className={GridView}>
                     {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => <SingleMovieView key={idx} movie={movie} />) : <NoResultView/>}

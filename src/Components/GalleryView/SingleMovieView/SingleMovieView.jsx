@@ -53,7 +53,7 @@ class SingleMovieView extends Component {
                     <div className={MovieMisc}>
                         <div className={this.getRatingClass()}>
 							<FontAwesomeIcon icon="star" />
-                            <p>{this.props.movie.rate ? this.props.movie.rate : "No Ratings"}</p>
+                            <p>{this.props.movie.rate ? this.props.movie.rate : "N/A"}</p>
 						</div>
                         <div className={Tags}>
                         {this.props.movie.genres && this.props.movie.genres.length !== 0 ? this.props.movie.genres.join(" | "): []}
