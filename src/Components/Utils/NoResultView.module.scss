@@ -1,0 +1,18 @@
+$no-result-size-icon: 50px;
+$no-result-size-p: 20px;
+$no-result-margin-p: 20px;
+$font-color: #888888;
+
+.NoResultView {
+    font-size: $no-result-size-icon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: $font-color;
+
+    p {
+        margin: $no-result-margin-p;
+        font-size: $no-result-size-p;
+    }
+}

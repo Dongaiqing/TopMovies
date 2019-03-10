@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import "semantic-ui-css/semantic.min.css";
 import PropTypes from "prop-types";
-import placeHolderImage from "../../../Assets/mv_ph.png";
 import { Link } from "react-router-dom";
-
-// Include your new Components here
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
 	DropDownMovieView as ViewCss,
@@ -20,12 +17,11 @@ import {
 	DropDownMovieViewDescMiscTagContainer as TagContainer,
 	Tag
 } from "./DropDownMovieView.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 class DropDownMovieView extends Component {
 	constructor() {
 		super();
-		this.poster_base = "https://image.tmdb.org/t/p/w500/";
 	}
 
 	getRatingClass() {
@@ -38,22 +34,15 @@ class DropDownMovieView extends Component {
 	}
 
 	render() {
+		const imageStyle = {
+			backgroundImage: `url(${this.props.movie.poster_path})`
+		}
 		return (
 			<div>
 				<div className={ViewCss}>
-					<div className={ViewImage}>
-						<img
-							src={
-								this.props.movie.poster_path !== null
-									? `${this.poster_base}${this.props.movie.poster_path}`
-									: placeHolderImage
-							}
-						/>
-					</div>
+					<div className={ViewImage} style={imageStyle}></div>
 					<div className={ViewDesc}>
-						<Link
-							to={{ pathname: "/detail", state: { id: this.props.movie.id } }}
-						>
+						<Link to={{ pathname: "/detail", state: { id: this.props.movie.id } }}>
 							<div className={DescTitle}>
 								<h1>{this.props.movie.title}</h1>
 							</div>

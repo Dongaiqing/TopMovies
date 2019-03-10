@@ -4,9 +4,6 @@ $input-focus-color: rgb(167, 71, 71);
 $input-padding: 15px;
 $ani-dur: 0.4s;
 $font-size: 30px;
-$no-result-size-icon: 50px;
-$no-result-size-p: 20px;
-$no-result-margin-p: 20px;
 
 .Search {
     width: 100%;
@@ -50,7 +47,7 @@ $no-result-margin-p: 20px;
     }
 
     &Result {
-        width: 70%;
+        width: 85%;
         height: 70%;
         display: flex;
         flex-direction: column;
@@ -60,22 +57,8 @@ $no-result-margin-p: 20px;
         margin: $input-padding;
         transition: max-height 0.15s ease-out;
     }
-
-    &NoResult {
-        font-size: $no-result-size-icon;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        color: $input-color;
-
-        p {
-            margin: $no-result-margin-p;
-            font-size: $no-result-size-p;
-        }
-    }
-
-        /* width */
+    
+    /* width */
     ::-webkit-scrollbar {
         transition: 0.4s;
         width: 2px;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Search as SearchCss, SearchInput, SearchResult, 
-		SearchNoResult as NoResult } from "./Search.module.scss";
+import placeHolderImage from "../../Assets/mv_ph.png";
+import { Search as SearchCss, SearchInput, SearchResult} from "./Search.module.scss";
 import DropDownMovieView from "./DropDownMovieView/DropDownMovieView";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NoResultView from "../Utils/NoResultView.jsx";
 
 const WAIT_INTERVAL = 500;
 
@@ -20,6 +20,7 @@ class Search extends Component {
 
 		this.timeout = 0;
 		this.baseUrl = "https://api.themoviedb.org/3/search/movie?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US&page=1&include_adult=false&query=";
+		this.poster_base = "https://image.tmdb.org/t/p/w500/";
 		
 		this.genreMap =  {
 			28: "Action",
@@ -79,7 +80,7 @@ class Search extends Component {
 							title: mv.title,
 							id: mv.id,
 							lang: mv.original_language,
-							poster_path: mv.poster_path,
+							poster_path: mv.poster_path ? `${this.poster_base}${mv.poster_path}` : placeHolderImage,
 							rate: mv.vote_average,
 							genres: mv.genre_ids.map((x) => this.genreMap[x]),
 							overview: mv.overview,
@@ -112,7 +113,7 @@ class Search extends Component {
 					value={this.state.value}
 				/>
 				<div className={SearchResult}>
-					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : <div className={NoResult}><FontAwesomeIcon icon="sad-tear" /><p>No results</p></div>}
+					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : <NoResultView/>}
 				</div>
 			</div>
 		);

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "semantic-ui-css/semantic.min.css";
 import placeHolderImage from "../../Assets/mv_ph_big.jpg";
-import { Link } from 'react-router-dom'
 import axios from "axios";
 
 import {

@@ -6,7 +6,7 @@ $button-size: 15px;
 $overview-size: 25px;
 $misc-size: 17px;
 $button-padding: 7px 15px 7px 15px;
-$header-padding: 60px 60px 20px 60px;
+$header-padding: 60px 80px 20px 80px;
 $main-red: rgb(167, 71, 71);
 
 body {
@@ -41,7 +41,7 @@ body {
             overflow: auto;
             
             h1 {
-                max-width: 60%;
+                max-width: 75%;
                 margin: 0;
                 align-self: flex-end;
                 font-size: $title-size;
