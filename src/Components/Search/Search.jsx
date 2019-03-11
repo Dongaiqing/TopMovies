@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import placeHolderImage from "../../Assets/mv_ph.png";
-import { Search as SearchCss, SearchInput, SearchResult} from "./Search.module.scss";
 import DropDownMovieView from "./DropDownMovieView/DropDownMovieView";
 import NoResultView from "../Utils/NoResultView.jsx";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
+import { Search as SearchCss, 
+	SearchInput, 
+	SearchResult,
+	SearchFilterDropDown as DropDownFilter,
+	SearchFilterDropDownButton as FilterButton,
+	SearchFilterDropDownContent as FilterContent
+} from "./Search.module.scss";
 
 const WAIT_INTERVAL = 500;
 
@@ -15,6 +24,7 @@ class Search extends Component {
 		this.state = {
 			value: "",
 			movie: {},
+			sortFilter: null,
 			hasMovie: false
 		};
 
@@ -44,8 +54,14 @@ class Search extends Component {
 			37: "Western"
 		}
 
+		this.filters = [
+			"▲ Average Voting",
+			"▼ Average Voting",
+			"▲ Release Date",
+			"▼ Release Date"
+		]
+
 		this.inputChangeHandler = this.inputChangeHandler.bind(this);
-		// this.clickHandler = this.clickHandler.bind(this);
 	}
 
 	inputChangeHandler(e) {
@@ -98,9 +114,73 @@ class Search extends Component {
 		} else {
 			this.setState({
 				movie: {}, 
-				hasMovie: false
+				hasMovie: false,
+				sortFilter: null
 			});
 		}
+	}
+
+	onSortSelected(x) {
+		if (!this.state.movie.attribute || this.state.movie.attribute.length <= 1)
+			return;
+		
+		let new_movie = {};
+		let cur_movie = this.state.movie.attribute;
+
+		switch (x) {
+			case "▲ Average Voting":
+				cur_movie.sort((m1, m2) => {
+					if (!m1.rate)
+						return -1;
+					else if (!m2.rate)
+						return 1;
+					else 
+						return m1.rate * 10 - m2.rate * 10;
+				});
+				break;
+			case "▼ Average Voting":
+				cur_movie.sort((m1, m2) => {
+					if (!m1.rate)
+						return 1;
+					else if (!m2.rate)
+						return -1;
+					else 
+						return m2.rate - m1.rate;
+				});
+				break;
+			case "▲ Release Date":
+				cur_movie.sort((m1, m2) => {
+					if (!m1.date)
+						return -1;
+					else if (!m2.date)
+						return 1;
+					else {
+						const d1 = Date.parse(m1.date);
+						const d2 = Date.parse(m2.date);
+						return d1 - d2;
+					}
+				});
+				break;
+			case "▼ Release Date":
+				cur_movie.sort((m1, m2) => {
+					if (!m1.date)
+						return 1;
+					else if (!m2.date)
+						return -1;
+					else {
+						const d1 = Date.parse(m1.date);
+						const d2 = Date.parse(m2.date);
+						return d2 - d1;
+					}
+				});
+				break;
+		}
+
+		new_movie.attribute = cur_movie;
+		this.setState({
+			sortFilter: x,
+			movie: new_movie
+		});
 	}
 
 	render() {
@@ -112,6 +192,15 @@ class Search extends Component {
 					placeholder="Enter Movie Name"
 					value={this.state.value}
 				/>
+				<div className={DropDownFilter}>
+                        <div className={FilterButton}>
+                            <FontAwesomeIcon icon="sort-amount-down"/>
+                            <p>Sort By</p>
+                        </div>
+                        <div className={FilterContent}>
+                            {this.filters.map((x, idx) => <div key={idx} onClick={() => this.onSortSelected(x)}>{x}</div>)}
+                        </div>
+                </div>
 				<div className={SearchResult}>
 					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : <NoResultView/>}
 				</div>

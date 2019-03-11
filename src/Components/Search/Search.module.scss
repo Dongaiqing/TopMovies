@@ -1,9 +1,17 @@
 $bg-color: rgb(38, 38, 38);
 $input-color: #888888;
 $input-focus-color: rgb(167, 71, 71);
-$input-padding: 15px;
+$input-padding: 10px;
+$input-margin-bottom: 20px;
 $ani-dur: 0.4s;
-$font-size: 30px;
+$input-size: 50px;
+$button-width: auto;
+$button-margin: 0px 0px 20px 0px;
+$main-red: rgb(161, 71, 71);
+$dropdown-color: #434343;
+$dropdown-shadow: #373737;
+$font-color: #dcdcdc;
+$main-red-active: rgb(113, 54, 54);
 
 .Search {
     width: 100%;
@@ -14,11 +22,12 @@ $font-size: 30px;
     justify-content: space-evenly;
     flex-direction: column;
     background-color: $bg-color;
+    padding: 50px;
     color: white;
 
     &Input {
         width: 70%;
-        height: 10%;
+        height: 100px;
         background: transparent;
         border: none;
         border-bottom: 2px solid $input-color;
@@ -26,7 +35,8 @@ $font-size: 30px;
         color: $input-color;
         transition: border $ani-dur ease-out;
         text-align: center;
-        font-size: $font-size;
+        font-size: $input-size;
+        margin-bottom: $input-margin-bottom;
         padding: $input-padding;
 
         &:focus {
@@ -46,6 +56,75 @@ $font-size: 30px;
         }
     }
 
+    &FilterDropDown {
+        position: relative;
+        display: inline-block;
+        color: $input-color;
+        font-size: 20px;
+
+        &Button {
+            display: flex;
+            flex-direction: row;
+            width: $button-width;
+            justify-content: center;
+            align-items: center;
+            margin: $button-margin;
+            transition: 0.4s;
+            font-size: 23px;
+
+            p {
+                margin-left: 15px;
+            }
+
+            &:hover {
+                transition: 0.4s;
+                cursor: pointer;
+                color: $main-red;
+            }
+        }
+
+        &Content {
+            display: none;
+            position: absolute;
+            background-color: $dropdown-color;
+            z-index: 9990; 
+            transition: .4s;
+            width: 300px;
+            max-height: 400px;
+            overflow: auto;
+            box-shadow: 0px 0px 2px 1px $dropdown-shadow;
+            
+            div {
+                width: 100%;
+                padding: 20px 30px 20px 30px;
+                color: $font-color;
+                text-decoration: none;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                transition: 0.4s;
+                
+                p {
+                    margin-left: 20px;
+                }
+                &:hover {
+                    background-color: $main-red;
+                    cursor: pointer;
+                    transition: 0.4s;
+                }
+
+                &:active {
+                    background-color: $main-red-active;
+                }
+            }
+        }
+
+        &:hover &Content {
+            display: block;
+            transition: .4s;
+        }       
+    }
+  
     &Result {
         width: 85%;
         height: 70%;

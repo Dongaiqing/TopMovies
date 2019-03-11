@@ -20,9 +20,6 @@ import {
 
 
 class DropDownMovieView extends Component {
-	constructor() {
-		super();
-	}
 
 	getRatingClass() {
 		if (!this.props.movie.rate) return `${Rate}`;
@@ -78,7 +75,7 @@ DropDownMovieView.propTypes = {
 	id: PropTypes.number,
 	lang: PropTypes.string,
 	poster_path: PropTypes.string,
-	rate: PropTypes.string,
+	rate: PropTypes.number,
 	genres: PropTypes.arrayOf(PropTypes.string),
 	overview: PropTypes.string,
 	date: PropTypes.string

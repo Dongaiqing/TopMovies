@@ -13,12 +13,6 @@ import { faSadTear, faStar, faClock, faDollarSign, faGlobe, faTag, faFilm,
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      height: "100%"
-    };
-  }
 
   render() {
     return (

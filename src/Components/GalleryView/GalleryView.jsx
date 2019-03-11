@@ -69,12 +69,12 @@ class GalleryView extends Component {
         };
 
         this.filterMap = {
-            "Popularity  ↑": "popularity.asc",
-            "Popularity  ↓": "popularity.desc",
-            "Release Date  ↑": "release_date.asc",
-            "Release Date  ↓": "release_date.desc",
-            "Rating Average  ↑": "vote_average.asc",
-            "Rating Average  ↓": "vote_average.desc"
+            "▲ Popularity": "popularity.asc",
+            "▼ Popularity": "popularity.desc",
+            "▲ Release Date": "release_date.asc",
+            "▼ Release Date": "release_date.desc",
+            "▲ Rating Average": "vote_average.asc",
+            "▼ Rating Average": "vote_average.desc",
         }
 
 		this.state = {
