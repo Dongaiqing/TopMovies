@@ -39,7 +39,7 @@ class DropDownMovieView extends Component {
 				<div className={ViewCss}>
 					<div className={ViewImage} style={imageStyle}></div>
 					<div className={ViewDesc}>
-						<Link to={{ pathname: "/detail", state: { id: this.props.movie.id } }}>
+						<Link to={{ pathname: "/detail", state: { ids: this.props.ids, id: this.props.movie.id } }}>
 							<div className={DescTitle}>
 								<h1>{this.props.movie.title}</h1>
 							</div>
@@ -77,6 +77,7 @@ DropDownMovieView.propTypes = {
 	poster_path: PropTypes.string,
 	rate: PropTypes.number,
 	genres: PropTypes.arrayOf(PropTypes.string),
+	ids: PropTypes.arrayOf(PropTypes.number),
 	overview: PropTypes.string,
 	date: PropTypes.string
 };

@@ -5,9 +5,14 @@ $title-size: 60px;
 $button-size: 15px;
 $overview-size: 25px;
 $misc-size: 17px;
+$title-padding-left: 100px;
 $button-padding: 7px 15px 7px 15px;
-$header-padding: 60px 80px 20px 80px;
+$header-padding: 60px $title-padding-left 20px $title-padding-left;
+$tagline-padding: 40px $title-padding-left 40px $title-padding-left;
+$tagline-font-size: 40px;
+$navigator-padding: 30px 20px 30px 20px;
 $main-red: rgb(167, 71, 71);
+$main-red-active: rgb(113, 54, 54);
 
 body {
     background-color: $bg-color;
@@ -20,7 +25,6 @@ body {
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
-    overflow: auto;
 
     &Header {
         display: flex;
@@ -72,11 +76,24 @@ body {
         }
     }
 
+    &Tagline {
+        padding: $tagline-padding;
+        width: 100%; 
+        margin: 0;
+        color: white;
+        text-align: left;
+
+        h1 {
+            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            font-size: $tagline-font-size; 
+        }
+    }
+
     &ContentWrapper {
         display: flex;
         flex-direction: row;
         width: 80%;
-        margin-bottom: 100px;
+        margin-bottom: 150px;
 
         &MiscWrapper {
             width: 25%;
@@ -122,6 +139,41 @@ body {
 
             p {
                 margin: 0px;
+            }
+        }
+    }
+
+    &Navigator {
+        display: flex;
+        position: fixed;
+        bottom: 0%;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        font-size: $tagline-font-size;
+        background-color: $bg-color;
+        z-index: 99999;
+        box-shadow: -10px -10px 40px $bg-color;
+
+        div {
+            display: flex;
+            width: 50%;
+            height: 100%;
+            align-content: center;
+            justify-content: center;
+            transition: 0.4s;
+            padding: $navigator-padding;
+            
+            &:hover {
+                cursor: pointer;
+                background-color: $main-red;
+                transition: 0.4s;
+            }
+
+            &:active {
+                background-color: $main-red-active;
             }
         }
     }

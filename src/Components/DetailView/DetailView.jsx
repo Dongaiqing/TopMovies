@@ -8,11 +8,13 @@ import {
 	DetailViewHeader as Header,
 	DetailViewHeaderButtonWrapper as ButtonWrapper,
 	DetailViewHeaderTitleWrapper as TitleWrapper,
+	DetailViewTagline as Tagline,
 	DetailViewContentWrapper as ContentWrapper,
 	DetailViewContentWrapperMiscWrapper as MiscWrapper,
 	DetailViewContentWrapperMiscWrapperComponent as ComponentWrapper,
 	DetailViewContentWrapperMiscWrapperComponentFontAwesome as fontAwesomeWrapper,
-	DetailViewContentWrapperOverview as Overview
+	DetailViewContentWrapperOverview as Overview,
+	DetailViewNavigator as Navigator
 } from "./DetailView.module.scss";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,8 +27,14 @@ class DetailView extends Component {
 		this.baseUrl = "https://api.themoviedb.org/3/movie/";
 		this.apiKey = "985fc26c8cc221e4e54bb0d5d2b6b119";
 
+		const ids = props.location.state.ids;
+		const id = props.location.state.id;
+		const curIdx = ids.indexOf(id);
+
 		this.state = {
-			id: props.location.state,
+			ids: ids,
+			id: id,
+			curIdx: curIdx,
 			movie: {},
 			hasMovie: false
 		};
@@ -36,7 +44,7 @@ class DetailView extends Component {
 
 	getMovieData(id) {
 		if (id) {
-			let url = `${this.baseUrl}${id.id}?api_key=${this.apiKey}&language=en-US`;
+			let url = `${this.baseUrl}${id}?api_key=${this.apiKey}&language=en-US`;
 
 			axios
 				.get(url)
@@ -65,7 +73,7 @@ class DetailView extends Component {
 						hasMovie: modi.length !== 0
 					});
 					console.log(data);
-					console.log(this.state.movie);
+					console.log(this.state);
 				})
 				.catch(error => {
 					console.log(error);
@@ -109,6 +117,41 @@ class DetailView extends Component {
 		return intVal === 0 ? `$${(revenue / 1000000).toFixed(2)}M` : `$${intVal}M`
 	}
 
+	onMovieChanged(status) {
+		const arrayLen = this.state.ids.length;
+		
+		switch (status) {
+			case "P":
+				if (this.state.curIdx === 0) {
+					this.setState({
+						curIdx: arrayLen - 1,
+						id: this.state.ids[arrayLen - 1]
+					}, this.getMovieData(this.state.ids[arrayLen - 1]));
+				} else {
+					const curIdx = this.state.curIdx;
+					this.setState({
+						curIdx: curIdx - 1,
+						id: this.state.ids[curIdx - 1]
+					}, this.getMovieData(this.state.ids[curIdx - 1]));
+				}
+				break;
+			case "N":
+				if (this.state.curIdx === arrayLen - 1) {
+					this.setState({
+						curIdx: 0,
+						id: this.state.ids[0]
+					}, this.getMovieData(this.state.ids[0]));
+				} else {
+					const curIdx = this.state.curIdx;
+					this.setState({
+						curIdx: curIdx + 1,
+						id: this.state.ids[curIdx + 1]
+					}, this.getMovieData(this.state.ids[curIdx + 1]))
+				}
+			break;
+		}
+	}
+
 	render() {
 		if (!this.state.id) {
 			return (
@@ -140,14 +183,6 @@ class DetailView extends Component {
 				width: "100%",
 				fontStyle: "italic"
 			}
-			const taglineStyle = {
-				padding: "30px 80px", 
-				width: "100%", 
-				margin: 0, 
-				color: "white", 
-				fontSize: "40px", 
-				textAlign: "left"
-			}
 
 			return (
 				<div className={DetailCss}>
@@ -161,7 +196,9 @@ class DetailView extends Component {
 							{movie.imdb ? <a href={movie.imdb} target="_blank" rel="noopener noreferrer" style={imdbStyle}>IMDB</a> : []}
 						</div>
 					</div>
-					<h1 style={taglineStyle}>{movie.tagline}</h1>
+					<div className={Tagline}>
+						<h1>{movie.tagline}</h1>
+					</div>
 					<div className={ContentWrapper}>
 						<div className={MiscWrapper}>
 							{/* Rating */}
@@ -221,6 +258,10 @@ class DetailView extends Component {
 						<div className={Overview}>
 							<p>{movie.overview}</p>
 						</div>
+					</div>
+					<div className={Navigator}>
+						<div onClick={() => this.onMovieChanged("P")}><FontAwesomeIcon icon="arrow-left"/></div>
+						<div onClick={() => this.onMovieChanged("N")}><FontAwesomeIcon icon="arrow-right"/></div>
 					</div>
 				</div>
 			);

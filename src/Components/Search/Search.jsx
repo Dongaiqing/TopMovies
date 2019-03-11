@@ -28,6 +28,7 @@ class Search extends Component {
 			hasMovie: false
 		};
 
+		this.ids = [];
 		this.timeout = 0;
 		this.baseUrl = "https://api.themoviedb.org/3/search/movie?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US&page=1&include_adult=false&query=";
 		this.poster_base = "https://image.tmdb.org/t/p/w500/";
@@ -86,12 +87,14 @@ class Search extends Component {
 				.get(url)
 				.then(response => {
 					const data = response.data;
-					console.log(data);
 					let modi = {};
 					modi.attribute = [];
-					
+					this.ids = [];
+
 					for (let i = 0; i < data.results.length; ++i) {
 						const mv = data.results[i];
+						this.ids.push(mv.id);
+
 						modi.attribute[i] = {
 							title: mv.title,
 							id: mv.id,
@@ -103,6 +106,7 @@ class Search extends Component {
 							date: mv.release_date
 						}
 					}
+				
 					this.setState({
 						movie: modi, 
 						hasMovie: modi.attribute.length !== 0
@@ -202,7 +206,7 @@ class Search extends Component {
                         </div>
                 </div>
 				<div className={SearchResult}>
-					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj}/>) : <NoResultView/>}
+					{this.state.hasMovie ? this.state.movie.attribute.map((obj, idx) => <DropDownMovieView key={idx} movie={obj} ids={this.ids}/>) : <NoResultView/>}
 				</div>
 			</div>
 		);
