@@ -9,9 +9,17 @@ import GalleryView from '../GalleryView/GalleryView.jsx';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSadTear, faStar, faClock, faDollarSign, faGlobe, faTag, faFilm, 
-          faSortAmountDown, faFilter, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+          faSortAmountDown, faFilter, faArrowUp, faArrowDown, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons'
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      height: "100%"
+    };
+  }
+
   render() {
     return (
       <Router>
@@ -27,7 +35,8 @@ class App extends Component {
 }
 
 const fonts = [faSadTear, faStar, faClock, faDollarSign, faGlobe, 
-                faTag, faFilm, faSortAmountDown, faFilter, faArrowUp, faArrowDown];
+                faTag, faFilm, faSortAmountDown, faFilter, faArrowUp, 
+                faArrowDown, faCheckSquare, faSquare];
 library.add(fonts);
 
 export default App;

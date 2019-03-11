@@ -115,10 +115,8 @@ class GalleryView extends Component {
                 }
                 this.setState({
                     movieList: modi, 
-                    hasMovie: modi.length !== 0
+                    hasMovie: modi.attribute.length !== 0
                 });
-                console.log(data);
-                console.log(this.state.movie);
             })
             .catch(error => {
                 console.log(error);
@@ -149,16 +147,13 @@ class GalleryView extends Component {
         }, () => this.getMovieList());
     }
 
-    onGenreSelected(idx, genre) {
-        const checkbox = this.refs[`genreCheck${idx}`];
+    onGenreSelected(genre) {
         let curSelection = this.state.genres;
         const index = curSelection.indexOf(genre);
         if (index === -1) {
             curSelection.push(genre);
-            checkbox.checked = true;
         } else {
             curSelection.splice(index, 1);
-            checkbox.checked = false;
         }
 
         this.setState({
@@ -189,13 +184,17 @@ class GalleryView extends Component {
                             <p>Genre Filter</p>
                         </div>
                         <div className={DropDownContent}>
-                            {Object.keys(this.genreToID).map((x, idx) => <div key={idx} onClick={() => this.onGenreSelected(idx, x)} ><input ref={`genreCheck${idx}`} type="checkbox" name={x} />{x}</div>)}
+                            {Object.keys(this.genreToID).map((x, idx) => 
+                            <div key={idx} onClick={() => this.onGenreSelected(x)} >
+                                <FontAwesomeIcon id="cbox" icon={this.state.genres.indexOf(x) === -1 ? ["far", "square"] : "check-square"}/><p>{x}</p>
+                            </div>)}
                         </div>
                     </div>
                 
                 </div>
                 <div className={GridView}>
-                    {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => <SingleMovieView key={idx} movie={movie} />) : <NoResultView/>}
+                    {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => 
+                    <SingleMovieView key={idx} movie={movie} />) : <NoResultView/>}
                 </div>
             </div>
         );

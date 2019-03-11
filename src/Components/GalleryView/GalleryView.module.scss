@@ -1,25 +1,24 @@
 $title-size: 60px;
 $font-size: 20px;
 $button-width: auto;
-$button-margin: 20px;
+$button-margin: 20px 60px;
 $main-red: rgb(161, 71, 71);
+$main-red-active: rgb(113, 54, 54);
 $font-color: #dcdcdc;
 $dropdown-color: #434343;
-$dropdown-shadow: #828282;
+$dropdown-shadow: #373737;
 
 
 .GalleryView {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
+    text-align: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: auto;
-    padding: 100px;
+    padding: 100px 30px;
 
     h1 {
-        margin: 0;
+        margin: 0px 0px 40px 0px;
         color: white;
         font-size: $title-size;
     }
@@ -29,7 +28,6 @@ $dropdown-shadow: #828282;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        width: 80%;
         color: $font-color;
         font-size: 20px;
         flex-wrap: wrap;
@@ -65,32 +63,37 @@ $dropdown-shadow: #828282;
                 z-index: 9990; 
                 transition: .4s;
                 width: 300px;
-                max-height: 500px;
+                max-height: 400px;
                 overflow: auto;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                box-shadow: 0px 0px 60px $dropdown-shadow;
-
+                box-shadow: 0px 0px 2px 1px $dropdown-shadow;
+                
                 div {
                     width: 100%;
                     padding: 20px 30px 20px 30px;
-                    height: 50px;
                     color: white;
                     text-decoration: none;
                     display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
                     transition: 0.4s;
-
+                    
+                    p {
+                        margin-left: 20px;
+                    }
                     &:hover {
                         background-color: $main-red;
                         cursor: pointer;
                         transition: 0.4s;
                     }
+
+                    &:active {
+                        background-color: $main-red-active;
+                    }
                 }
             }
 
             &:hover &Content {
-                display: flex;
+                display: block;
                 transition: .4s;
             }
               
@@ -102,5 +105,18 @@ $dropdown-shadow: #828282;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        margin-top: 40px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 7px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: none; 
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $main-red; 
     }
 }
