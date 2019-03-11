@@ -37,7 +37,7 @@ class DropDownMovieView extends Component {
 		}
 		return (
 			<div>
-				<Link to={{ pathname: "/detail", state: { ids: this.props.ids, id: this.props.movie.id } }}>
+				<Link to={{ pathname: `${process.env.PUBLIC_URL}/detail`, state: { ids: this.props.ids, id: this.props.movie.id } }}>
 				<div className={ViewCss}>
 					<div className={ViewImage} style={imageStyle}></div>
 					<div className={ViewDesc}>

@@ -40,7 +40,7 @@ class SingleMovieView extends Component {
         }
 		return (
 			<div className={ViewCss}>
-                <Link to={{ pathname: "/detail", state: { id: this.props.movie.id, ids: this.props.ids } }}>
+                <Link to={{ pathname: `${process.env.PUBLIC_URL}/detail`, state: { id: this.props.movie.id, ids: this.props.ids } }}>
                     <div className={PosterHolder} style={posterStyle}></div>
 				</Link>
                 <div className={Properties}>

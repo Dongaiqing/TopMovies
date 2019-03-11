@@ -23,12 +23,12 @@ class Home extends Component {
           </div>
 
           <div className={ButtonWrapper}>
-            <Link to="/search">
+            <Link to={`${process.env.PUBLIC_URL}/search`}>
               <div className={HomeButton}>
                 Search
               </div>
             </Link>
-            <Link to="/gallery">
+            <Link to={`${process.env.PUBLIC_URL}/gallery`}>
               <div className={HomeButton}>
                 Explore
               </div>

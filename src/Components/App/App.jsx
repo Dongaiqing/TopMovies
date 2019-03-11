@@ -19,10 +19,10 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/search" component={Search}/>
-          <Route exact path="/detail" component={DetailView}/>
-          <Route exact path="/gallery" component={GalleryView}/>
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home}/>
+          <Route exact path={`${process.env.PUBLIC_URL}/search`} component={Search}/>
+          <Route exact path={`${process.env.PUBLIC_URL}/detail`} component={DetailView}/>
+          <Route exact path={`${process.env.PUBLIC_URL}/gallery`} component={GalleryView}/>
         </Switch>
       </Router>
     );
