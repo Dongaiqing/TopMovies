@@ -82,7 +82,9 @@ class GalleryView extends Component {
             genres: [],
 			movieList: {},
 			hasMovie: false
-		};
+        };
+        
+        this.ids = [];
 
 		this.getMovieList();
 	}
@@ -102,8 +104,11 @@ class GalleryView extends Component {
                 const data = response.data;
                 let modi = {};
                 modi.attribute = [];
+                this.ids = [];
                 for (let i = 0; i < data.results.length; ++i) {
                     const mv = data.results[i];
+                    this.ids.push(mv.id);
+
 					modi.attribute[i] = {
                         title: mv.title,
                         id: mv.id,
@@ -194,7 +199,7 @@ class GalleryView extends Component {
                 </div>
                 <div className={GridView}>
                     {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => 
-                    <SingleMovieView key={idx} movie={movie} />) : <NoResultView/>}
+                    <SingleMovieView key={idx} movie={movie} ids={this.ids}/>) : <NoResultView/>}
                 </div>
             </div>
         );
