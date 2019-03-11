@@ -7,6 +7,7 @@ $main-red-active: rgb(113, 54, 54);
 $font-color: #dcdcdc;
 $dropdown-color: #434343;
 $dropdown-shadow: #373737;
+$transition-duration: 0.4s;
 
 
 .GalleryView {
@@ -43,14 +44,14 @@ $dropdown-shadow: #373737;
                 justify-content: center;
                 align-items: center;
                 margin: $button-margin;
-                transition: 0.4s;
+                transition: $transition-duration;
     
                 p {
                     margin-left: 15px;
                 }
     
                 &:hover {
-                    transition: 0.4s;
+                    transition: $transition-duration;
                     cursor: pointer;
                     color: $main-red;
                 }
@@ -75,7 +76,7 @@ $dropdown-shadow: #373737;
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    transition: 0.4s;
+                    transition: $transition-duration;
                     
                     p {
                         margin-left: 20px;
@@ -83,7 +84,7 @@ $dropdown-shadow: #373737;
                     &:hover {
                         background-color: $main-red;
                         cursor: pointer;
-                        transition: 0.4s;
+                        transition: $transition-duration;
                     }
 
                     &:active {

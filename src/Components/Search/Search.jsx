@@ -181,6 +181,7 @@ class Search extends Component {
 		}
 
 		new_movie.attribute = cur_movie;
+		this.ids = cur_movie.map((x) => x.id);
 		this.setState({
 			sortFilter: x,
 			movie: new_movie

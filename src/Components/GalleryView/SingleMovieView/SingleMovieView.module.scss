@@ -13,6 +13,8 @@ $med-color: rgb(176, 158, 87);
 $good-color: rgb(88, 140, 83);
 $no-color: rgb(92, 92, 92);
 $tag-margin: 20px;
+$transition-duration: 0.4s;
+
 
 .SingleMovieView {
     width: $view-width;
@@ -28,12 +30,12 @@ $tag-margin: 20px;
         width: 100%;
         height: $poster-height;
         background-size: cover;
-        transition: all 0.4s;
+        transition: all $transition-duration;
         z-index: 1;
 
         &:hover {
             transform: scale(1.2);
-            transition: 0.4s;
+            transition: $transition-duration;
             cursor: pointer;
         }
     }

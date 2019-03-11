@@ -13,6 +13,7 @@ $tagline-font-size: 40px;
 $navigator-padding: 30px 20px 30px 20px;
 $main-red: rgb(167, 71, 71);
 $main-red-active: rgb(113, 54, 54);
+$transition-duration: 0.4s;
 
 body {
     background-color: $bg-color;
@@ -36,7 +37,7 @@ body {
         justify-content: flex-end;
         flex-direction: column;
         padding: $header-padding;
-        transition: 0.4s;
+        transition: $transition-duration;
 
         &TitleWrapper {
             display: flex;
@@ -164,13 +165,13 @@ body {
             height: 100%;
             align-content: center;
             justify-content: center;
-            transition: 0.4s;
+            transition: $transition-duration;
             padding: $navigator-padding;
             
             &:hover {
                 cursor: pointer;
                 background-color: $main-red;
-                transition: 0.4s;
+                transition: $transition-duration;
             }
 
             &:active {

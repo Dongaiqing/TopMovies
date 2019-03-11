@@ -36,14 +36,15 @@ class DropDownMovieView extends Component {
 		}
 		return (
 			<div>
+				<Link to={{ pathname: "/detail", state: { ids: this.props.ids, id: this.props.movie.id } }}>
 				<div className={ViewCss}>
 					<div className={ViewImage} style={imageStyle}></div>
 					<div className={ViewDesc}>
-						<Link to={{ pathname: "/detail", state: { ids: this.props.ids, id: this.props.movie.id } }}>
+				
 							<div className={DescTitle}>
 								<h1>{this.props.movie.title}</h1>
 							</div>
-						</Link>
+		
 						<div className={DescMisc}>
 							<div className={this.getRatingClass()}>
 								<FontAwesomeIcon icon="star" />
@@ -65,6 +66,7 @@ class DropDownMovieView extends Component {
 						</div>
 					</div>
 				</div>
+				</Link>
 			</div>
 		);
 	}
