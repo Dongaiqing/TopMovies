@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import "semantic-ui-css/semantic.min.css";
 import placeHolderImage from "../../Assets/mv_ph.png";
-import { Link } from 'react-router-dom'
 import axios from "axios";
 import SingleMovieView from './SingleMovieView/SingleMovieView.jsx';
 import NoResultView from '../Utils/NoResultView.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import "semantic-ui-css/semantic.min.css";
 
 import {
     GalleryView as ViewCss,

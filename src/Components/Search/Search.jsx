@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import placeHolderImage from "../../Assets/mv_ph.png";
 import DropDownMovieView from "./DropDownMovieView/DropDownMovieView";
 import NoResultView from "../Utils/NoResultView.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import "semantic-ui-css/semantic.min.css";
 
 import { Search as SearchCss, 
 	SearchInput, 
@@ -177,6 +176,8 @@ class Search extends Component {
 						return d2 - d1;
 					}
 				});
+				break;
+			default: 
 				break;
 		}
 

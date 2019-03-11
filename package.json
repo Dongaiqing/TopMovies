@@ -2,6 +2,7 @@
   "name": "mp2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Dongaiqing.github.io/CS498RK-MP2/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-regular-svg-icons": "^5.7.2",
@@ -9,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "font-awesome": "4.7.0",
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
@@ -16,7 +18,7 @@
     "react-dom": "^16.8.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "^2.1.8",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0"
   },
@@ -24,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,8 +38,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.2"
-  }
+  ]
 }

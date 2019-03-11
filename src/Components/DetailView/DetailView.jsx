@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "semantic-ui-css/semantic.min.css";
 import placeHolderImage from "../../Assets/mv_ph_big.jpg";
+import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 
 import {
@@ -148,7 +148,9 @@ class DetailView extends Component {
 						id: this.state.ids[curIdx + 1]
 					}, this.getMovieData(this.state.ids[curIdx + 1]))
 				}
-			break;
+				break;
+			default:
+				break;
 		}
 	}
 

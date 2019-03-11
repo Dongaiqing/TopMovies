@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import placeHolderImage from "../../../Assets/mv_ph.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "semantic-ui-css/semantic.min.css";
 
 import {
     SingleMovieView as ViewCss,
