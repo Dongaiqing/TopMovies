@@ -2,7 +2,7 @@
   "name": "mp2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Dongaiqing.github.io/CS498RK-MP2/",
+  "homepage": "https://dongaiqing.github.io/CS498RK-MP2/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-regular-svg-icons": "^5.7.2",
