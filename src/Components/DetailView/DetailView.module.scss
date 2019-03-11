@@ -36,6 +36,7 @@ body {
         justify-content: flex-end;
         flex-direction: column;
         padding: $header-padding;
+        transition: 0.4s;
 
         &TitleWrapper {
             display: flex;
