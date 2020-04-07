@@ -12,16 +12,17 @@ import {
     GalleryViewFilterControlDropDown as DropDownMenu,
     GalleryViewFilterControlDropDownButton as Button,
     GalleryViewFilterControlDropDownContent as DropDownContent,
-    GalleryViewGridView as GridView
+    GalleryViewGridView as GridView,
+    GalleryViewNavigator as Navigator
 } from "./GalleryView.module.scss";
 
 
 class GalleryView extends Component {
 	constructor() {
         super();
-
+        console.log("constructor");
 		this.imgBase = "https://image.tmdb.org/t/p/w500/";
-        this.baseUrl = "https://api.themoviedb.org/3/discover/movie?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US&page=1";
+        this.baseUrl = "https://api.themoviedb.org/3/discover/movie?api_key=985fc26c8cc221e4e54bb0d5d2b6b119&language=en-US";
 
         this.genreToID = {
 			"Action": 28,
@@ -80,27 +81,31 @@ class GalleryView extends Component {
             sortBy: null,
             genres: [],
 			movieList: {},
-			hasMovie: false
+            hasMovie: false,
+            page: 1,
+            totalPages: 0,
+            contentChanged: false
         };
         
         this.ids = [];
-
-		this.getMovieList();
 	}
 
 	getMovieList() {
+        console.log("getMovieList");
         let sortUrl = this.state.sortBy ? 
                         `&sort_by=${this.state.sortBy}` : '';
         let genresUrl = this.state.genres.length !== 0 ? 
                         `&with_genres=${this.state.genres.map(
                             x => this.genreToID[x]
                         ).join(',')}` : '';
+        let pageUrl = `&page=${this.state.page}`;
 
-        const url = `${this.baseUrl}${sortUrl}${genresUrl}`;
+        const url = `${this.baseUrl}${pageUrl}${sortUrl}${genresUrl}`;
         axios
             .get(url)
             .then(response => {
                 const data = response.data;
+                const totalPages = data.total_pages;
                 let modi = {};
                 modi.attribute = [];
                 this.ids = [];
@@ -119,13 +124,25 @@ class GalleryView extends Component {
                 }
                 this.setState({
                     movieList: modi, 
-                    hasMovie: modi.attribute.length !== 0
+                    hasMovie: modi.attribute.length !== 0,
+                    totalPages: totalPages,
+                    contentChanged: true
                 });
             })
             .catch(error => {
                 console.log(error);
             });
-	}
+    }
+    
+    onPageChanged(page) {
+        if (page < 1 || page > this.state.totalPages) {
+            return;
+        } 
+        this.setState({
+            page: page,
+            contentChanged: false
+        }, () => this.getMovieList());
+    } 
 
 	getRatingColor() {
 		const badColor = "rgb(167, 71, 71)";
@@ -147,7 +164,10 @@ class GalleryView extends Component {
     
     onSortSelected(sort) {
         this.setState({
+            ...this.state,
+            page: 1,
             sortBy: this.filterMap[sort],
+            contentChanged: false
         }, () => this.getMovieList());
     }
 
@@ -161,13 +181,19 @@ class GalleryView extends Component {
         }
 
         this.setState({
+            ...this.state,
+            page: 1,
             genres: curSelection,
+            contentChanged: false
         }, () => this.getMovieList());
     }
 
 	render() {
+        console.log("render");
         return (
-            <div className={ViewCss}>
+            <div className={ViewCss} onScroll={() => {
+                
+            }}>
                 <h1>
                     Movie Gallery
                 </h1>
@@ -200,8 +226,20 @@ class GalleryView extends Component {
                     {this.state.hasMovie ? this.state.movieList.attribute.map((movie, idx) => 
                     <SingleMovieView key={idx} movie={movie} ids={this.ids}/>) : <NoResultView/>}
                 </div>
+                <div className={Navigator} style={!this.state.hasMovie ? {display: "none"} : {display: "flex"}}>
+					<div onClick={() => this.onPageChanged(this.state.page - 1)}><FontAwesomeIcon icon="arrow-left"/></div>
+					<div onClick={() => this.onPageChanged(this.state.page + 1)}><FontAwesomeIcon icon="arrow-right"/></div>
+				</div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        this.getMovieList(this.state.page);
+    }
+
+    shouldComponentUpdate(_, nextState) {
+        return nextState.contentChanged;
     }
 }
 
