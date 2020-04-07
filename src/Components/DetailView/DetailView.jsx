@@ -36,13 +36,13 @@ class DetailView extends Component {
 			id: id,
 			curIdx: curIdx,
 			movie: {},
-			hasMovie: false
+			hasMovie: false,
+			movieChanged: false
 		};
-
-		this.getMovieData(this.state.id);
 	}
 
-	getMovieData(id) {
+	getMovieData() {
+		const id = this.state.id;
 		if (id) {
 			let url = `${this.baseUrl}${id}?api_key=${this.apiKey}&language=en-US`;
 
@@ -70,10 +70,9 @@ class DetailView extends Component {
 					};
 					this.setState({
 						movie: modi, 
-						hasMovie: modi.length !== 0
+						hasMovie: modi.length !== 0,
+						movieChanged: true
 					});
-					console.log(data);
-					console.log(this.state);
 				})
 				.catch(error => {
 					console.log(error);
@@ -81,7 +80,8 @@ class DetailView extends Component {
 		} else {
 			this.setState({
 				movie: {}, 
-				hasMovie: false
+				hasMovie: false,
+				movieChanged: true
 			});
 		}
 	}
@@ -125,28 +125,32 @@ class DetailView extends Component {
 				if (this.state.curIdx === 0) {
 					this.setState({
 						curIdx: arrayLen - 1,
-						id: this.state.ids[arrayLen - 1]
-					}, this.getMovieData(this.state.ids[arrayLen - 1]));
+						id: this.state.ids[arrayLen - 1],
+						movieChanged: false
+					}, this.getMovieData());
 				} else {
 					const curIdx = this.state.curIdx;
 					this.setState({
 						curIdx: curIdx - 1,
-						id: this.state.ids[curIdx - 1]
-					}, this.getMovieData(this.state.ids[curIdx - 1]));
+						id: this.state.ids[curIdx - 1],
+						movieChanged: false
+					}, this.getMovieData());
 				}
 				break;
 			case "N":
 				if (this.state.curIdx === arrayLen - 1) {
 					this.setState({
 						curIdx: 0,
-						id: this.state.ids[0]
-					}, this.getMovieData(this.state.ids[0]));
+						id: this.state.ids[0],
+						movieChanged: false
+					}, this.getMovieData());
 				} else {
 					const curIdx = this.state.curIdx;
 					this.setState({
 						curIdx: curIdx + 1,
-						id: this.state.ids[curIdx + 1]
-					}, this.getMovieData(this.state.ids[curIdx + 1]))
+						id: this.state.ids[curIdx + 1],
+						movieChanged: false
+					}, this.getMovieData())
 				}
 				break;
 			default:
@@ -155,6 +159,7 @@ class DetailView extends Component {
 	}
 
 	render() {
+		console.log("detail render");
 		if (!this.state.id) {
 			return (
 				<div>invalid parameter</div>
@@ -187,6 +192,7 @@ class DetailView extends Component {
 			}
 
 			return (
+				
 				<div className={DetailCss}>
 					<div className={Header} style={headerStyle}>
 						<div className={TitleWrapper}>
@@ -268,6 +274,14 @@ class DetailView extends Component {
 				</div>
 			);
 		}
+	}
+
+	componentDidMount() {
+		this.getMovieData();
+	}
+
+	shouldComponentUpdate(_, nextState) {
+		return nextState.movieChanged;
 	}
 }
 
