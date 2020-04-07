@@ -1,19 +1,29 @@
 {
-  "main.css": "/TopMovies/static/css/main.bfb9cca9.chunk.css",
-  "main.js": "/TopMovies/static/js/main.366083f8.chunk.js",
-  "main.js.map": "/TopMovies/static/js/main.366083f8.chunk.js.map",
-  "runtime~main.js": "/TopMovies/static/js/runtime~main.5db24b62.js",
-  "runtime~main.js.map": "/TopMovies/static/js/runtime~main.5db24b62.js.map",
-  "static/css/2.8240bea7.chunk.css": "/TopMovies/static/css/2.8240bea7.chunk.css",
-  "static/js/2.3d6b7342.chunk.js": "/TopMovies/static/js/2.3d6b7342.chunk.js",
-  "static/js/2.3d6b7342.chunk.js.map": "/TopMovies/static/js/2.3d6b7342.chunk.js.map",
-  "index.html": "/TopMovies/index.html",
-  "precache-manifest.6c52092a146006a229bbaa6213950ac0.js": "/TopMovies/precache-manifest.6c52092a146006a229bbaa6213950ac0.js",
-  "service-worker.js": "/TopMovies/service-worker.js",
-  "static/css/2.8240bea7.chunk.css.map": "/TopMovies/static/css/2.8240bea7.chunk.css.map",
-  "static/css/main.bfb9cca9.chunk.css.map": "/TopMovies/static/css/main.bfb9cca9.chunk.css.map",
-  "static/media/Home.module.scss": "/TopMovies/static/media/background.d864d6ba.jpg",
-  "static/media/semantic.min.css": "/TopMovies/static/media/outline-icons.ef60a4f6.woff",
-  "static/media/mv_ph.png": "/TopMovies/static/media/mv_ph.adac23d5.png",
-  "static/media/mv_ph_big.jpg": "/TopMovies/static/media/mv_ph_big.72b7903d.jpg"
+  "files": {
+    "main.css": "/TopMovies/static/css/main.baecc7bb.chunk.css",
+    "main.js": "/TopMovies/static/js/main.c32c1a3c.chunk.js",
+    "main.js.map": "/TopMovies/static/js/main.c32c1a3c.chunk.js.map",
+    "runtime-main.js": "/TopMovies/static/js/runtime-main.78a49e89.js",
+    "runtime-main.js.map": "/TopMovies/static/js/runtime-main.78a49e89.js.map",
+    "static/css/2.21713e02.chunk.css": "/TopMovies/static/css/2.21713e02.chunk.css",
+    "static/js/2.df61257b.chunk.js": "/TopMovies/static/js/2.df61257b.chunk.js",
+    "static/js/2.df61257b.chunk.js.map": "/TopMovies/static/js/2.df61257b.chunk.js.map",
+    "index.html": "/TopMovies/index.html",
+    "precache-manifest.0fef6058f7168f350631ed5cfa201d85.js": "/TopMovies/precache-manifest.0fef6058f7168f350631ed5cfa201d85.js",
+    "service-worker.js": "/TopMovies/service-worker.js",
+    "static/css/2.21713e02.chunk.css.map": "/TopMovies/static/css/2.21713e02.chunk.css.map",
+    "static/css/main.baecc7bb.chunk.css.map": "/TopMovies/static/css/main.baecc7bb.chunk.css.map",
+    "static/js/2.df61257b.chunk.js.LICENSE.txt": "/TopMovies/static/js/2.df61257b.chunk.js.LICENSE.txt",
+    "static/media/Home.module.scss": "/TopMovies/static/media/background.d864d6ba.jpg",
+    "static/media/semantic.min.css": "/TopMovies/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/mv_ph.png": "/TopMovies/static/media/mv_ph.adac23d5.png",
+    "static/media/mv_ph_big.jpg": "/TopMovies/static/media/mv_ph_big.72b7903d.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.78a49e89.js",
+    "static/css/2.21713e02.chunk.css",
+    "static/js/2.df61257b.chunk.js",
+    "static/css/main.baecc7bb.chunk.css",
+    "static/js/main.c32c1a3c.chunk.js"
+  ]
 }
