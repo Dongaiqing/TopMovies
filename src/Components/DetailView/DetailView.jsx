@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class DetailView extends Component {
 	constructor(props) {
 		super(props);
-		this.imgBase = "https://image.tmdb.org/t/p/w500/";
+		this.imgBase = "https://image.tmdb.org/t/p/original/";
 		this.baseUrl = "https://api.themoviedb.org/3/movie/";
 		this.apiKey = "985fc26c8cc221e4e54bb0d5d2b6b119";
 

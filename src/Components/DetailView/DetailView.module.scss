@@ -1,4 +1,4 @@
-$header-height: 400px;
+$header-height: 1000px;
 $bg-color: rgb(38, 38, 38);
 $font-color: #c6c6c6;
 $title-size: 60px;
@@ -30,10 +30,11 @@ body {
     &Header {
         display: flex;
         color: white;
-        box-shadow: inset 0px -100px 170px 30px $bg-color;
+        box-shadow: inset 0px -130px 100px 100px $bg-color;
         width: 100%;
         height: $header-height;
         background-size: cover;
+        background-position: top;
         justify-content: flex-end;
         flex-direction: column;
         padding: $header-padding;
